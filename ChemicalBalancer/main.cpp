@@ -4,9 +4,7 @@
 enum atomDetailTypes{Symbol = 1, Name = 2, AtomicNumber = 3, MassNumber = 4};
 
 int main(int argc, const char * argv[]) {
-    std::string keyIDinput;
-    std::string keyInput;
-    std::string parameterID;
+    std::string keyIDinput, keyInput, parameterID;
     while(true) {
         std::getline(std::cin, keyIDinput);
         std::getline(std::cin, keyInput);

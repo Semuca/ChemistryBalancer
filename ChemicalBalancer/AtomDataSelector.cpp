@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream>
+#include <string>
 #include "AtomDataSelector.hpp"
 
 std::string FindDataInLine(std::string line, int ID) {
@@ -19,8 +19,6 @@ std::string GetAtomData(int keyID, std::string key, int parameterID){
             std::string testKey = FindDataInLine(line, keyID);
             if (testKey == key) {
                 return FindDataInLine(line, parameterID);
-            } else {
-                continue;
             }
         }
         return "No atom found";

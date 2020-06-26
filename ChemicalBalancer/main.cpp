@@ -9,30 +9,42 @@ private:
     int _atomicMass;
     float _massNumber;
 public:
-    Atom(std::string symbol, std::string name, int atomicMass, float massNumber)
-    : _symbol(symbol), _name(name), _atomicMass(atomicMass), _massNumber(massNumber) {}
+    Atom(std::tuple<std::string, std::string, int, int> atomData)
+    : _symbol(std::get<0>(atomData)), _name(std::get<1>(atomData)), _atomicMass(std::get<2>(atomData)), _massNumber(std::get<3>(atomData)) {}
+    
+    std::string GetSymbol() {
+        return _symbol;
+    }
 };
+
+std::vector<Atom> reactants, products;
+std::string reactantsString = "Null", productsString = "Null";
+
+void UpdateEquation(std::vector<Atom> &molecules, std::string &moleculesString) {
+    std::string input;
+    std::getline(std::cin, input);
+    Atom atom = Atom(GetAtomData(input));
+    if (atom.GetSymbol() != "Null") {
+        molecules.emplace_back(atom);
+        if (molecules.size() > 1) {
+            moleculesString += " + ";
+        } else {
+            moleculesString = "";
+        }
+        moleculesString += input;
+    } else {
+        std::cout << "Invalid atom symbol" << std::endl;
+    }
+}
 
 int main(int argc, const char * argv[]) {
     std::string input;
-    std::vector<Atom> reactants, products;
-    std::string reactantsString, productsString;
     while(true) {
         std::getline(std::cin, input);
         if (input == "1") {
-            std::getline(std::cin, input);
-            reactants.emplace_back(Atom(input, GetAtomData(1, input, 2), std::stoi(GetAtomData(1, input, 3)), std::stof(GetAtomData(1, input, 4))));
-            if (reactants.size() > 1) {
-                reactantsString += " + ";
-            }
-            reactantsString += input;
+            UpdateEquation(reactants, reactantsString);
         } else if (input == "2") {
-            std::getline(std::cin, input);
-            products.emplace_back(Atom(input, GetAtomData(1, input, 2), std::stoi(GetAtomData(1, input, 3)), std::stof(GetAtomData(1, input, 4))));
-            if (products.size() > 1) {
-                productsString += " + ";
-            }
-            productsString += input;
+            UpdateEquation(products, productsString);
         }
         std::cout << reactantsString << " -> " << productsString << std::endl;
     }

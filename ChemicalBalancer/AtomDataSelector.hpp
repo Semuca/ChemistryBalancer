@@ -1,6 +1,6 @@
 #ifndef AtomDataSelector_hpp
 #define AtomDataSelector_hpp
 
-std::string GetAtomData(int keyID, std::string key, int parameterID);
+std::tuple<std::string, std::string, int, int> GetAtomData(std::string symbol);
 
 #endif /* AtomDataSelector_hpp */

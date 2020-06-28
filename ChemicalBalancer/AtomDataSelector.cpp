@@ -10,7 +10,7 @@ std::tuple<std::string, std::string, int, int> GetAtomData(std::string symbol) {
         while (atomData >> line) {
             std::string symbolTest = line.substr(0, symbol.size());
             if (symbolTest == symbol) {
-                std::size_t beginPos, endPos = symbol.size();;
+                std::size_t beginPos, endPos = symbol.size();
                 std::string data[4];
                 data[0] = symbol;
                 for (int i = 1; i < 4; i++) {
